@@ -19,7 +19,18 @@
     document.body.appendChild(app.view);
 
     var drive = new Drive();
-    drive.startSimulation();
+
+    function startButtonCallback() {
+
+      // Note that these parantheses on the edges are very important for some unknown reason
+      var userCode = '(function() {console.log("User callback");})'
+      var userCallback = eval(userCode);
+
+      drive.startSimulation(userCallback);
+    }
+
   </script>
+
+  <button type="button" onclick="startButtonCallback()">Click Me!</button>
 </body>
 </html>
