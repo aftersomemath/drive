@@ -5,6 +5,8 @@ class Car {
 		this.yPos = y;
 		this.radius = radius;
 		this.xVel = 0,this.xAccel = 0, this.yVel = 0, this.yAccel = 0;
+		var width = radius; var height = radius;
+		this.boundingRect = new Rectangle(x, y, width, height);
 	}
 
 	draw(carGraphic, scalingFactor) {
