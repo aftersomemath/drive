@@ -7,7 +7,10 @@ class Car {
 		this.xPos = 0, this.xVel = 0, this.xAccel = 0, this.yPos = 0, this.yVel = 0, this.yAccel = 0;
 	}
   
-	
+	static getCar()
+	{
+		return new Car(0,0,0);
+	}
 	
 	drawCar() {
 		var circle = new PIXI.Graphics();
