@@ -5,6 +5,7 @@
   <title>Self Driving Car Game</title>
 </head>
 
+<link rel="stylesheet" type="text/css" href="style.css">
 <script src="pixi.min.js"></script> <!-- importing pixi and custom classes -->
 <script src="car.js"></script>
 <script src="drive.js"></script>
@@ -17,8 +18,27 @@
     var app = new PIXI.Application({backgroundColor : 0x1099bb});
     resize();
 
-    window.onresize = function (event){
-        resize();
+    window.onresize = function (event){ resize(); }
+    window.onload = function () { onLoad(); };
+
+    var drive = new Drive();
+
+    function startButtonCallback()
+	  {
+
+      // Note that these parantheses on the edges are very important for some unknown reason
+      var userCode = '(function() {console.log("User callback");})';
+      var userCallback = eval(userCode);
+
+      drive.startSimulation(userCallback);
+    }
+
+    function onLoad()
+    {
+      // The application will create a canvas element for you that you 
+      // can then insert into the DOM.
+      test = document.getElementById("htmlcanvas");
+      test.appendChild(app.view);
     }
 
     function resize() {
@@ -33,24 +53,10 @@
       app.renderer.resize(w,h);
     }
 
-    // The application will create a canvas element for you that you 
-    // can then insert into the DOM.
-    document.body.appendChild(app.view);
-
-    var drive = new Drive();
-
-
-    function startButtonCallback()
-	  {
-
-      // Note that these parantheses on the edges are very important for some unknown reason
-      var userCode = '(function() {console.log("User callback");})';
-      var userCallback = eval(userCode);
-
-      drive.startSimulation(userCallback);
-    }
-
   </script>
+
+  <div id="htmlcanvas" name="htmlcanvas" class="drawcanvas"></div>
+
   <button type="button" onclick="startButtonCallback()">Upload your code!</button>
 
 </body>
