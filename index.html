@@ -25,11 +25,11 @@
     window.onload = function () { onLoad(); };
     var drive = null;
     var editor = null;
+    var container = null;
+    var scalingFactor = 0.0; // width of the canvas / 20 meter, eventually
+	  var graphics;
 
-    var scalingFactor = 0.0;
-
-    function startButtonCallback()
-    {
+    function startButtonCallback() {
       // Note that these parantheses on the edges are very important for some unknown reason
       var userCode = '(function(car){' + editor.getValue() + '})';
       var userCallback = eval(userCode);
@@ -40,9 +40,10 @@
     {
       resize();
 
-      var graphics = new PIXI.Graphics();
-      var container = new PIXI.Container();
-      drive = new Drive(app, graphics, scalingFactor, container);
+      graphics = new PIXI.Graphics();
+      container = new PIXI.Container();
+      drive = Drive.levelSelect(app, 0, graphics, container, scalingFactor);
+
       app.stage.addChild(graphics);
       app.stage.addChild(container);
 
@@ -50,7 +51,6 @@
       // can then insert into the DOM.
       test = document.getElementById("htmlcanvas");
       test.appendChild(app.view);
-
 
       editor = ace.edit("editor");
       editor.setTheme("ace/theme/monokai");
@@ -76,6 +76,13 @@
       }
     }
 
+	function onLevelChange(level) {
+	  drive = Drive.levelSelect(app, level, graphics, container, scalingFactor);
+	}
+	function dropdownLevel(level)
+	{
+		onLevelChange(level);
+	}
   </script>
 
   <div id="htmlcanvas" name="htmlcanvas" class="drawcanvas"></div>
@@ -90,8 +97,9 @@ car.accelerate(2,0);</div>
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#">instructions</a>
-    <a href="#">levels</a>
-    <a href="#">how it works</a>
+    <a href="#" onclick="onLevelChange(0)">level 0</a>
+    <a href="#" onclick="onLevelChange(1)">level 1</a>
+
   </div>
 
   <script>
@@ -112,7 +120,6 @@ car.accelerate(2,0);</div>
   <div id="footer">
     made with &#9825 at tartanhacks... H2P
   </div>
-
 
 </body>
 </html>

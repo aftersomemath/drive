@@ -1,15 +1,14 @@
 class Drive
 {
-  constructor(app, graphics, scalingFactor,container){
-    this.objects = [new Obstacle(3,3,2,2), new Obstacle(7,7,0.5,0.5)];
-    this.endpoint = new Endpoint(3, 0, 2, 2);
+  constructor(app,graphics, scalingFactor){
+    this.cars = [];
+    this.objects = [];
+    this.endpoint;
     this.scalingFactor = scalingFactor;
     this.userCallback = null;
     this.lastTimeStamp = 0;
     this.time = null;
     this.graphics = graphics;
-    this.container = container;
-    this.cars = [new Car(0, 0, 2, 1.2,this.container)];
     this.app = app;
   }
 
@@ -28,27 +27,32 @@ class Drive
     this.app.ticker.add(this.update, this);
   }
 
+  render(deltaTime)
+  {
+    this.graphics.clear();
+
+    for(var i = 0; i < this.objects.length; i++)
+    {
+      var object = this.objects[i];
+      object.draw(this.graphics, this.scalingFactor);
+    }
+
+    this.endpoint.draw(this.graphics, this.scalingFactor);
+
+    for(var i = 0; i < this.cars.length; i++)
+    {
+      var car = this.cars[i];
+      car.draw(this.scalingFactor);
+    }
+  }
+
   update()
   {
       var currentTime = Date.now();
       var deltaTime = (currentTime - this.lastTimeStamp)/1000.0;
       this.lastTimeStamp = currentTime;
 
-      this.graphics.clear();
-
-      for(var i = 0; i < this.objects.length; i++)
-      {
-        var object = this.objects[i];
-        object.draw(this.graphics, this.scalingFactor);
-      }
-
-      this.endpoint.draw(this.graphics, this.scalingFactor);
-
-      for(var i = 0; i < this.cars.length; i++)
-      {
-        var car = this.cars[i];
-        car.draw(this.scalingFactor);
-      }
+      this.render();
 
       for(var i = 0; i < this.objects.length; i++)
       {
@@ -100,6 +104,28 @@ class Drive
         console.log("Impossible state, is the world ending?");
       }
 
+  }
+
+  static levelSelect(app, level, graphics, container, scalingFactor) {
+	  var drive = new Drive(app, graphics, scalingFactor);
+    container.removeChildren();
+	  switch(level) {
+		  case 0:
+		      drive.cars[0] = new Car(10, 5.625, 2, 1.2, container);
+	        drive.endpoint = new Endpoint (18,0,2,11.25);
+		    break;
+		  case 1:
+		    drive.cars[0] = new Car(0.75, 5.625, 2, 1.2, container)
+	        drive.objects[0] = new Obstacle(0,0,20,2);
+	        drive.objects[1] = new Obstacle(0,9.25,20,2);
+	        drive.endpoint = new Endpoint (18,2,2,7.25);
+			break;
+		  default:
+	  	    drive.cars[0] = new Car(10,5.625, 2, 1.2, container);
+	        drive.endpoint = new Endpoint (18,0,2,11.25);
+	  }
+    drive.render();
+	  return drive;
   }
 
 }
