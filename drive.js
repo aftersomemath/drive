@@ -91,12 +91,12 @@ class Drive
       }
       else if(gameState == 1)
       {
-        console.log("YOU CRASHED");
+        alert("YOU CRASHED");
         this.app.ticker.remove(this.update, this);
       }
       else if(gameState == 2)
       {
-        console.log("YOU WON");
+        alert("YOU WON");
         this.app.ticker.remove(this.update, this);
       }
       else
@@ -120,6 +120,13 @@ class Drive
 	        drive.objects[1] = new Obstacle(0,9.25,20,2);
 	        drive.endpoint = new Endpoint (18,2,2,7.25);
 			break;
+      case 2:
+          drive.cars[0] = new Car(0.75, 4, 2, 1.2, container)
+          drive.objects[0] = new Obstacle(-10,0,20,2);
+          drive.objects[1] = new Obstacle(-10,9.25,20,2);
+          drive.objects[2] = new Obstacle(5, 0.5, 0.5, 5);
+          drive.endpoint = new Endpoint (18,2,2,7.25);
+      break;
 		  default:
 	  	    drive.cars[0] = new Car(10,5.625, 2, 1.2, container);
 	        drive.endpoint = new Endpoint (18,0,2,11.25);

@@ -28,11 +28,12 @@
     var container = null;
     var scalingFactor = 0.0; // width of the canvas / 20 meter, eventually
 	  var graphics;
-
+    var level2 = 0;
     function startButtonCallback() {
       // Note that these parantheses on the edges are very important for some unknown reason
       var userCode = '(function(car){' + editor.getValue() + '})';
       var userCallback = eval(userCode);
+      drive = Drive.levelSelect(app, level2, graphics, container, scalingFactor);
       drive.startSimulation(userCallback);
     }
 
@@ -73,11 +74,13 @@
       if(drive != null)
       {
         drive.setScalingFactor(scalingFactor);
+        drive.render();
       }
     }
 
 	function onLevelChange(level) {
 	  drive = Drive.levelSelect(app, level, graphics, container, scalingFactor);
+    level2 = level;
 	}
 	function dropdownLevel(level)
 	{
@@ -90,7 +93,17 @@
   <div id="textwindow">
     <div id="editor">// TODO: type your code here
 // and submit below to run!
-car.accelerate(2,0);</div>
+
+if(car.xPos < 3.0
+  && car.yPos < 8.0)
+{
+  car.accelerate(2.0, 2);
+}
+
+else
+{
+    car.accelerate(2, -3.5);
+}</div>
     <button id="submitbutton" type="button" onclick="startButtonCallback()">upload</button>
   </div>
 
@@ -99,6 +112,7 @@ car.accelerate(2,0);</div>
     <a href="#">instructions</a>
     <a href="#" onclick="onLevelChange(0)">level 0</a>
     <a href="#" onclick="onLevelChange(1)">level 1</a>
+    <a href="#" onclick="onLevelChange(2)">level 2</a>
 
   </div>
 
