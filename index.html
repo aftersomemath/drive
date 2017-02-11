@@ -91,7 +91,17 @@
   <div id="textwindow">
     <div id="editor">// TODO: type your code here
 // and submit below to run!
-car.accelerate(2,0);</div>
+
+if(car.xPos < 3.0
+  && car.yPos < 8.0)
+{
+  car.accelerate(2.0, 2);
+}
+
+else
+{
+    car.accelerate(2, -3.5);
+}</div>
     <button id="submitbutton" type="button" onclick="startButtonCallback()">upload</button>
   </div>
 
@@ -100,6 +110,7 @@ car.accelerate(2,0);</div>
     <a href="#">instructions</a>
     <a href="#" onclick="onLevelChange(0)">level 0</a>
     <a href="#" onclick="onLevelChange(1)">level 1</a>
+    <a href="#" onclick="onLevelChange(2)">level 2</a>
 
   </div>
 
