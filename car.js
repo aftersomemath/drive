@@ -1,4 +1,8 @@
 class Car {
+	var msInDay = 24*60*60*1000; //ms
+	var oldTime; //a Date.UTC
+	var xPos = 0, xVel = 0, xAccel = 0, yPos = 0, yVel = 0, yAccel = 0;
+	
   constructor(x,y,radius) {
     this.x = x;
     this.y = y;
@@ -14,14 +18,23 @@ class Car {
   }
 
   function update(){
-
+	var newTime = new Date.UTC(); // current time in universal time (no timezone)
+	var deltaTime = newTime - oldTime;
+	oldTime = newTime; // updating old time to be current time
+	
+	//Motion Equations
+	xPos = xPos + xVel * deltaTime + 0.5 * xAccel * Math.pow(xAccel,2);
+	yPos = yPos + yVel * deltaTime + 0.5 * yAccel * Math.pow(yAccel,2);
+	xVel = xVel + xAccel * deltaTime;
+	yVel = yVel + yAccel * deltaTime;
   }
 
-  getSpeed() {
-    return 0.0;
+  getVelocity() {
+    return [xVel, yVel];
   }
 
-  accelerate(x, y) {
-
+  accelerate(xAcc, yAcc) {
+	this.xAccel = xAcc;
+	this.yAccel = yAcc;
   }
 }

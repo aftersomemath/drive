@@ -11,12 +11,16 @@ class Drive
   {
 	  var delay = 1000/60; // 1000 ms /60 cycles = delay for 60 Hz functionality
 	  var timer = setTimeout(func, delay);
-
+	  
+		var carRadius = 4;
+		var vehicle = new Car(0,0,carRadius);
+		Car.drawCar();
+	  
 	  function func() // kind of like an infinite while loop, where the loop is done @ 60 Hz
 	  {
 		userCallback();
-
-
+		
+		Car.update();
 		timer = setTimeout(func, delay); //kind of recursion
 	  }
 
