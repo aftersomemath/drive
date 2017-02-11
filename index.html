@@ -14,7 +14,24 @@
     // The application will create a renderer using WebGL, if possible,
     // with a fallback to a canvas render. It will also setup the ticker
     // and the root stage PIXI.Container.
-    var app = new PIXI.Application(800, 600, {backgroundColor : 0x1099bb});
+    var app = new PIXI.Application({backgroundColor : 0x1099bb});
+    resize();
+
+    window.onresize = function (event){
+        resize();
+    }
+
+    function resize() {
+      var w = window.innerWidth*(3.0/5.0);
+      var h = w * (9.0/16.0);
+
+      //this part resizes the canvas but keeps ratio the same
+      app.renderer.view.style.width = w + "px";
+      app.renderer.view.style.height = h + "px";
+
+      //this part adjusts the ratio:
+      app.renderer.resize(w,h);
+    }
 
     // The application will create a canvas element for you that you 
     // can then insert into the DOM.
@@ -22,11 +39,12 @@
 
     var drive = new Drive();
 
+
     function startButtonCallback()
-	{
+	  {
 
       // Note that these parantheses on the edges are very important for some unknown reason
-      var userCode = '(function() {console.log("User callback");})'
+      var userCode = '(function() {console.log("User callback");})';
       var userCallback = eval(userCode);
 
       drive.startSimulation(userCallback);
