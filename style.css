@@ -2,5 +2,25 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: maroon;
+}
+
+#textwindow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 65%;
+    bottom:0;
+}
+
+#editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom:10%;
+}
+
+#submitbutton {
+    position: absolute;
+    top: 90%;
 }
