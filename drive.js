@@ -11,14 +11,14 @@ class Drive
   {
 	  var delay = 1000/60; // 1000 ms /60 cycles = delay for 60 Hz functionality
 	  var timer = setTimeout(func, delay);
-	  
+
 	  function func() // kind of like an infinite while loop, where the loop is done @ 60 Hz
 	  {
 		userCallback();
-		
-		
+
+
 		timer = setTimeout(func, delay); //kind of recursion
 	  }
-  
+
   }
 }
