@@ -19,7 +19,7 @@
     // The application will create a renderer using WebGL, if possible,
     // with a fallback to a canvas render. It will also setup the ticker
     // and the root stage PIXI.Container.
-    var app = new PIXI.Application({backgroundColor : 0x1099bb});
+    var app = new PIXI.Application({backgroundColor : 0x1099bb, antialias: true});
 
     window.onresize = function (event){ resize(); }
     window.onload = function () { onLoad(); };
@@ -42,7 +42,7 @@
 
       var graphics = new PIXI.Graphics();
       var container = new PIXI.Container();
-      drive = new Drive(graphics, scalingFactor, container);
+      drive = new Drive(app, graphics, scalingFactor, container);
       app.stage.addChild(graphics);
       app.stage.addChild(container);
 
@@ -83,7 +83,7 @@
   <div id="textwindow">
     <div id="editor">// TODO: type your code here
 // and submit below to run!
-car.accelerate(2,2);</div>
+car.accelerate(2,0);</div>
     <button id="submitbutton" type="button" onclick="startButtonCallback()">upload</button>
   </div>
 
