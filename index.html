@@ -25,11 +25,9 @@
     window.onload = function () { onLoad(); };
     var drive = null;
     var editor = null;
-
-    var scalingFactor = 0.0;
-
-    function startButtonCallback()
-    {
+    var scalingFactor = 0.0; // width of the canvas / 20 meter, eventually
+	var graphics;
+    function startButtonCallback() {
       // Note that these parantheses on the edges are very important for some unknown reason
       var userCode = '(function(car){' + editor.getValue() + '})';
       var userCallback = eval(userCode);
@@ -40,9 +38,8 @@
     {
       resize();
 
-      var graphics = new PIXI.Graphics();
-      var container = new PIXI.Container();
-      drive = new Drive(app, graphics, scalingFactor, container);
+      graphics = new PIXI.Graphics();
+
       app.stage.addChild(graphics);
       app.stage.addChild(container);
 
@@ -50,7 +47,6 @@
       // can then insert into the DOM.
       test = document.getElementById("htmlcanvas");
       test.appendChild(app.view);
-
 
       editor = ace.edit("editor");
       editor.setTheme("ace/theme/monokai");
@@ -76,6 +72,13 @@
       }
     }
 
+	function onLevelChange(level) {
+	  drive = Drive.levelSelect(level,graphics,scalingFactor);
+	}
+	function dropdownLevel(level)
+	{
+		onLevelChange(level);
+	}
   </script>
 
   <div id="htmlcanvas" name="htmlcanvas" class="drawcanvas"></div>
@@ -112,7 +115,6 @@ car.accelerate(2,0);</div>
   <div id="footer">
     made with &#9825 at tartanhacks... H2P
   </div>
-
 
 </body>
 </html>

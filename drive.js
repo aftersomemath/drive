@@ -1,8 +1,9 @@
 class Drive
 {
-  constructor(app, graphics, scalingFactor,container){
-    this.objects = [new Obstacle(3,3,2,2), new Obstacle(7,7,0.5,0.5)];
-    this.endpoint = new Endpoint(3, 0, 2, 2);
+  constructor(app,graphics, scalingFactor){
+    this.cars = [];
+    this.objects = [];
+    this.endpoint;
     this.scalingFactor = scalingFactor;
     this.userCallback = null;
     this.lastTimeStamp = 0;
@@ -100,6 +101,28 @@ class Drive
         console.log("Impossible state, is the world ending?");
       }
 
+  }
+
+  static levelSelect(level, graphics, scalingFactor) {
+	  var drive = new Drive(graphics, scalingFactor);
+
+	  switch(level) {
+		  case 0:
+		    drive.cars[0] = new Car(10,5.625, 0.5);
+	        drive.endpoint = new Endpoint (18,0,2,11.25);
+		    break;
+		  case 1:
+		    drive.cars[0] = new Car(0.75, 5.625, 0.5)
+	        drive.objects[0] = new Obstacle(0,0,20,2);
+	        drive.objects[1] = new Obstacle(0,9.25,20,2);
+	        drive.endpoint = new Endpoint (18,2,2,7.25);
+			break;
+		  default:
+	  	    drive.cars[0] = new Car(10,5.625, 0.5);
+	        drive.endpoint = new Endpoint (18,0,2,11.25);
+	  }
+
+	  return drive;
   }
 
 }
