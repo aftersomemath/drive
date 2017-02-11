@@ -103,7 +103,7 @@ class Drive
 
   static levelSelect(app, level, graphics, container, scalingFactor) {
 	  var drive = new Drive(app, graphics, scalingFactor);
-
+    container.removeChildren();
 	  switch(level) {
 		  case 0:
 		      drive.cars[0] = new Car(10, 5.625, 2, 1.2, container);
