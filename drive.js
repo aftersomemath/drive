@@ -34,14 +34,6 @@ class Drive
 
       this.graphics.clear();
 
-      for(var i = 0; i < this.cars.length; i++)
-      {
-        var car = this.cars[i];
-        this.userCallback(car);
-        car.update(deltaTime);
-        car.draw(this.graphics, this.scalingFactor);
-      }
-
       for(var i = 0; i < this.objects.length; i++)
       {
         var object = this.objects[i];
@@ -50,7 +42,50 @@ class Drive
       }
 
       this.endpoint.draw(this.graphics, this.scalingFactor);
-      this.timer = setTimeout(this.update.bind(this), this.updateDelay);
+
+      // 0 is regular, 1 is over, 2 is won
+      var gameState = 0;
+
+      for(var i = 0; i < this.cars.length; i++)
+      {
+        var car = this.cars[i];
+        this.userCallback(car);
+        car.update(deltaTime);
+        car.draw(this.graphics, this.scalingFactor);
+
+        for(var i = 0; i < this.objects.length; i++)
+        {
+          var object = this.objects[i];
+          var touch = object.boundingRect.isTouching(car.boundingRect);
+          if(touch)
+          {
+            gameState = 1;
+          }
+        }
+
+        if((gameState == 0) && this.endpoint.boundingRect.isTouching(car.boundingRect))
+        {
+          gameState = 2;
+        }
+      }
+
+      if(gameState == 0)
+      {
+        this.timer = setTimeout(this.update.bind(this), this.updateDelay);
+      }
+      else if(gameState == 1)
+      {
+        console.log("YOU CRASHED");
+      }
+      else if(gameState == 2)
+      {
+        console.log("YOU WON");
+      }
+      else
+      {
+        console.log("Impossible state, is the world ending?");
+      }
+
   }
 
 }
