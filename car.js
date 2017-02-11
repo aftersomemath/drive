@@ -1,22 +1,22 @@
 class Car {
-	
-	constructor(x,y,radius) {
+
+	constructor(x,y,radius,carGraphic) {
 		this.xPos = x;
 		this.yPos = y;
 		this.radius = radius;
-		this.xPos = 0, this.xVel = 0, this.xAccel = 0, this.yPos = 0, this.yVel = 0, this.yAccel = 0;
+		this.xVel = 0,this.xAccel = 0, this.yVel = 0, this.yAccel = 0;
 	}
   
 	static getCar()
 	{
 		return new Car(0,0,0);
 	}
-	
-	drawCar() {
-		var circle = new PIXI.Graphics();
-		circle.beginFill(0xe74c3c); // Red
-		circle.drawCircle(this.x,this.y,this.radius); // drawCircle(x, y, radius)
-		circle.endFill();
+
+	drawCar(carGraphic) {
+    	carGraphic.lineStyle(0);
+		carGraphic.beginFill(0xe74c3c); // Red
+		carGraphic.drawCircle(this.x,this.y,this.radius); // drawCircle(x, y, radius)
+		carGraphic.endFill();
 	}
 
 	update(deltaTime){

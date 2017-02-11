@@ -10,7 +10,7 @@
 <script src="pixi.min.js"></script> <!-- importing pixi and custom classes -->
 <script src="car.js"></script>
 <script src="drive.js"></script>
-  
+
 <body>
   <script type="text/javascript">
     // The application will create a renderer using WebGL, if possible,
@@ -21,8 +21,9 @@
 
     window.onresize = function (event){ resize(); }
     window.onload = function () { onLoad(); };
-
-    var drive = new Drive();
+    var objects = new PIXI.Graphics();
+    var drive = new Drive(objects);
+    app.stage.addChild(objects);
     var editor = null;
     function startButtonCallback()
 	  {
@@ -37,7 +38,7 @@
 
     function onLoad()
     {
-      // The application will create a canvas element for you that you 
+      // The application will create a canvas element for you that you
       // can then insert into the DOM.
       test = document.getElementById("htmlcanvas");
       test.appendChild(app.view);
