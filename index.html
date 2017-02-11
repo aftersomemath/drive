@@ -25,8 +25,10 @@
     window.onload = function () { onLoad(); };
     var drive = null;
     var editor = null;
+    var container = null;
     var scalingFactor = 0.0; // width of the canvas / 20 meter, eventually
-	var graphics;
+	  var graphics;
+
     function startButtonCallback() {
       // Note that these parantheses on the edges are very important for some unknown reason
       var userCode = '(function(car){' + editor.getValue() + '})';
@@ -39,6 +41,8 @@
       resize();
 
       graphics = new PIXI.Graphics();
+      container = new PIXI.Container();
+      drive = Drive.levelSelect(0, graphics, container, scalingFactor);
 
       app.stage.addChild(graphics);
       app.stage.addChild(container);

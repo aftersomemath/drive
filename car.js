@@ -13,6 +13,7 @@ class Car {
 		this.newCar.width = this.width * scalingFactor;
 		this.newCar.height = this.height * scalingFactor;
 		this.newCar.visible = true;
+		console.log(container);
 		container.addChild(this.newCar);
 	}
 

@@ -9,8 +9,6 @@ class Drive
     this.lastTimeStamp = 0;
     this.time = null;
     this.graphics = graphics;
-    this.container = container;
-    this.cars = [new Car(0, 0, 2, 1.2,this.container)];
     this.app = app;
   }
 
@@ -103,22 +101,23 @@ class Drive
 
   }
 
-  static levelSelect(level, graphics, scalingFactor) {
+  static levelSelect(level, graphics, container, scalingFactor) {
 	  var drive = new Drive(graphics, scalingFactor);
 
 	  switch(level) {
 		  case 0:
-		    drive.cars[0] = new Car(10,5.625, 0.5);
+          console.log(container);
+		      drive.cars[0] = new Car(10,5.625, 0.5, container);
 	        drive.endpoint = new Endpoint (18,0,2,11.25);
 		    break;
 		  case 1:
-		    drive.cars[0] = new Car(0.75, 5.625, 0.5)
+		    drive.cars[0] = new Car(0.75, 5.625, 0.5, container)
 	        drive.objects[0] = new Obstacle(0,0,20,2);
 	        drive.objects[1] = new Obstacle(0,9.25,20,2);
 	        drive.endpoint = new Endpoint (18,2,2,7.25);
 			break;
 		  default:
-	  	    drive.cars[0] = new Car(10,5.625, 0.5);
+	  	    drive.cars[0] = new Car(10,5.625, 0.5, container);
 	        drive.endpoint = new Endpoint (18,0,2,11.25);
 	  }
 
