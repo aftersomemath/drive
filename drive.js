@@ -101,23 +101,22 @@ class Drive
 
   }
 
-  static levelSelect(level, graphics, container, scalingFactor) {
-	  var drive = new Drive(graphics, scalingFactor);
+  static levelSelect(app, level, graphics, container, scalingFactor) {
+	  var drive = new Drive(app, graphics, scalingFactor);
 
 	  switch(level) {
 		  case 0:
-          console.log(container);
-		      drive.cars[0] = new Car(10,5.625, 0.5, container);
+		      drive.cars[0] = new Car(10, 5.625, 2, 1.2, container);
 	        drive.endpoint = new Endpoint (18,0,2,11.25);
 		    break;
 		  case 1:
-		    drive.cars[0] = new Car(0.75, 5.625, 0.5, container)
+		    drive.cars[0] = new Car(0.75, 5.625, 2, 1.2, container)
 	        drive.objects[0] = new Obstacle(0,0,20,2);
 	        drive.objects[1] = new Obstacle(0,9.25,20,2);
 	        drive.endpoint = new Endpoint (18,2,2,7.25);
 			break;
 		  default:
-	  	    drive.cars[0] = new Car(10,5.625, 0.5, container);
+	  	    drive.cars[0] = new Car(10,5.625, 2, 1.2, container);
 	        drive.endpoint = new Endpoint (18,0,2,11.25);
 	  }
 

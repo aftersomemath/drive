@@ -42,7 +42,7 @@
 
       graphics = new PIXI.Graphics();
       container = new PIXI.Container();
-      drive = Drive.levelSelect(0, graphics, container, scalingFactor);
+      drive = Drive.levelSelect(app, 0, graphics, container, scalingFactor);
 
       app.stage.addChild(graphics);
       app.stage.addChild(container);
@@ -77,7 +77,7 @@
     }
 
 	function onLevelChange(level) {
-	  drive = Drive.levelSelect(level,graphics,scalingFactor);
+	  drive = Drive.levelSelect(app, level, graphics, container, scalingFactor);
 	}
 	function dropdownLevel(level)
 	{
