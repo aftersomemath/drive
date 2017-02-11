@@ -2,11 +2,13 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>Self Driving Car Game</title>
 </head>
-  <script src="pixi.min.js"></script>
-  <script src="car.js"></script>
-  <script src="drive.js"></script>
+
+<script src="pixi.min.js"></script> <!-- importing pixi and custom classes -->
+<script src="car.js"></script>
+<script src="drive.js"></script>
+  
 <body>
   <script type="text/javascript">
     // The application will create a renderer using WebGL, if possible,
@@ -20,7 +22,8 @@
 
     var drive = new Drive();
 
-    function startButtonCallback() {
+    function startButtonCallback()
+	{
 
       // Note that these parantheses on the edges are very important for some unknown reason
       var userCode = '(function() {console.log("User callback");})'
@@ -30,7 +33,7 @@
     }
 
   </script>
+  <button type="button" onclick="startButtonCallback()">Upload your code!</button>
 
-  <button type="button" onclick="startButtonCallback()">Click Me!</button>
 </body>
 </html>
