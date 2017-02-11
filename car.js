@@ -4,37 +4,32 @@ class Car {
 		this.xPos = x;
 		this.yPos = y;
 		this.radius = radius;
-		this.oldTime = new Date.UTC();
 		this.xPos = 0, this.xVel = 0, this.xAccel = 0, this.yPos = 0, this.yVel = 0, this.yAccel = 0;
 	}
   
 	
 	
 	drawCar() {
-		var circle = new Graphics();
+		var circle = new PIXI.Graphics();
 		circle.beginFill(0xe74c3c); // Red
 		circle.drawCircle(this.x,this.y,this.radius); // drawCircle(x, y, radius)
 		circle.endFill();
 	}
 
-	update(){
-		var newTime = new Date.UTC(); // current time in universal time (no timezone)
-		var deltaTime = newTime - oldTime;
-		oldTime = newTime; // updating old time to be current time
-		
+	update(deltaTime){
 		// Motion Equations
-		xPos = xPos + xVel * deltaTime + 0.5 * xAccel * Math.pow(xAccel,2);
-		yPos = yPos + yVel * deltaTime + 0.5 * yAccel * Math.pow(yAccel,2);
-		xVel = xVel + xAccel * deltaTime;
-		yVel = yVel + yAccel * deltaTime;
-	  }
+		this.xPos = this.xPos + this.xVel * deltaTime + 0.5 * this.xAccel * Math.pow(this.xAccel,2);
+		this.yPos = this.yPos + this.yVel * deltaTime + 0.5 * this.yAccel * Math.pow(this.yAccel,2);
+		this.xVel = this.xVel + this.xAccel * deltaTime;
+		this.yVel = this.yVel + this.yAccel * deltaTime;
+	}
 
-	  getVelocity() {
+	getVelocity() {
 		return [xVel, yVel];
-	  }
+	}
 
-	  accelerate(xAcc, yAcc) {
+	accelerate(xAcc, yAcc) {
 		this.xAccel = xAcc;
 		this.yAccel = yAcc;
-	  }
+	}
 }
