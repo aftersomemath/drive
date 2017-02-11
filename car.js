@@ -8,18 +8,20 @@ class Car {
 		this.xVel = 0,this.xAccel = 0, this.yVel = 0, this.yAccel = 0;
 		this.boundingRect = new Rectangle(x, y, width, height);
 		this.newCar = PIXI.Sprite.fromImage('greencar.jpg');
-		this.newCar.visible = false;
+		this.newCar.x = this.xPos * scalingFactor;
+		this.newCar.y = this.yPos * scalingFactor;
+		this.newCar.width = this.width * scalingFactor;
+		this.newCar.height = this.height * scalingFactor;
+		this.newCar.visible = true;
 		container.addChild(this.newCar);
 	}
 
 	draw(scalingFactor) {
-		this.newCar.visible = true;
-		this.newCar.x = this.xPos;
-		this.newCar.y = this.yPos;
+		this.newCar.x = this.xPos * scalingFactor;
+		this.newCar.y = this.yPos * scalingFactor;
 		this.newCar.width = this.width * scalingFactor;
 		this.newCar.height = this.height * scalingFactor;
-
-
+		this.newCar.visible = true;
 
 		//carGraphic.lineStyle(0);
 		//carGraphic.beginFill(0xe74c3c); // Red
@@ -33,6 +35,8 @@ class Car {
 		this.yVel = this.yVel + (this.yAccel * deltaTime);
 		this.xPos = this.xPos + (this.xVel * deltaTime);
 		this.yPos = this.yPos + (this.yVel * deltaTime);
+		this.boundingRect.x = this.xPos;
+		this.boundingRect.y = this.yPos;
 	}
 
 	getVelocity() {
