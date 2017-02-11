@@ -1,24 +1,13 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Hello World</title>
-</head>
-  <script src="pixi.min.js"></script>
-<body>
-  <script type="text/javascript">
-    // The application will create a renderer using WebGL, if possible,
-    // with a fallback to a canvas render. It will also setup the ticker
-    // and the root stage PIXI.Container.
-    var app = new PIXI.Application();
+class Drive {
+  constructor(app) {
+    // Save off pixie application
+    this.app = app;
+  }
 
-    // The application will create a canvas element for you that you 
-    // can then insert into the DOM.
-    document.body.appendChild(app.view);
-
+  // This should take a callback to call when the simulation
+  startSimulation() {
     // load the texture we need
     PIXI.loader.add('bunny', 'bunny.jpg').load(function(loader, resources) {
-
         // This creates a texture from a 'bunny.png' image.
         var bunny = new PIXI.Sprite(resources.bunny.texture);
 
@@ -39,7 +28,5 @@
             bunny.rotation += 0.01;
         });
     });
-  </script>
-</body>
-</html>
-
+  }
+}
