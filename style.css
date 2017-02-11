@@ -5,6 +5,19 @@ body {
 }
 
 .button {
+  background-color: black;
+  font-family: NTR;
+  border-radius: 10%;
+  color: white;
+  position: absolute;
+  left: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-top: 2%;
+  font-size: 110%;
+}
+
+#button2 {
   background-color: lime;
   font-family: NTR;
   border-radius: 10%;
@@ -13,7 +26,7 @@ body {
   left: 2%;
   padding-left: 1%;
   padding-right: 1%;
-  margin-top: 2%;
+  margin-top: 5%;
   font-size: 110%;
   border: black;
   font-weight: bold;
@@ -42,19 +55,17 @@ body {
     right: 0;
     left: 0;
     bottom:10%;
-    font-size: 100%;
 }
 
 #submitbutton {
     position: absolute;
     top: 92%;
-    background-color: lime;
+    background-color: black;
     font-family: NTR;
-    font-weight: bold;
     border-radius: 10%;
-    color: black;
+    color: white;
     position: absolute;
-    border: 1px black;
+    border: none;
     font-size: 110%;
 }
 
@@ -77,7 +88,7 @@ body {
     z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
-    background-color: lime; /* Black*/
+    background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -88,14 +99,14 @@ body {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: black;
+    color: #818181;
     display: block;
     transition: 0.3s;
     font-family: NTR;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus .button a:hover{
+.sidenav a:hover, .offcanvas a:focus{
     color: #f1f1f1;
 }
 
@@ -107,4 +118,23 @@ body {
     font-size: 36px;
     margin-left: 50px;
     color: black;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
