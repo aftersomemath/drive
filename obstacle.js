@@ -16,6 +16,6 @@ class Obstacle
   }
 
   update(deltaTime){
-
+    this.x = this.x + 1.0 * deltaTime;// this.xPos + (this.xVel * deltaTime);
   }
 }

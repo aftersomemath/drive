@@ -122,8 +122,8 @@ class Drive
 			break;
       case 2:
           drive.cars[0] = new Car(0.75, 4, 2, 1.2, container)
-          drive.objects[0] = new Obstacle(0,0,20,2);
-          drive.objects[1] = new Obstacle(0,9.25,20,2);
+          drive.objects[0] = new Obstacle(-10,0,20,2);
+          drive.objects[1] = new Obstacle(-10,9.25,20,2);
           drive.objects[2] = new Obstacle(5, 0.5, 0.5, 5);
           drive.endpoint = new Endpoint (18,2,2,7.25);
       break;

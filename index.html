@@ -28,11 +28,12 @@
     var container = null;
     var scalingFactor = 0.0; // width of the canvas / 20 meter, eventually
 	  var graphics;
-
+    var level2 = 0;
     function startButtonCallback() {
       // Note that these parantheses on the edges are very important for some unknown reason
       var userCode = '(function(car){' + editor.getValue() + '})';
       var userCallback = eval(userCode);
+      drive = Drive.levelSelect(app, level2, graphics, container, scalingFactor);
       drive.startSimulation(userCallback);
     }
 
@@ -79,6 +80,7 @@
 
 	function onLevelChange(level) {
 	  drive = Drive.levelSelect(app, level, graphics, container, scalingFactor);
+    level2 = level;
 	}
 	function dropdownLevel(level)
 	{
