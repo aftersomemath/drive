@@ -1,7 +1,6 @@
 class Drive
 {
-  constructor(graphics, scalingFactor){
-    this.cars = [new Car(5, 5, 0.5)];
+  constructor(graphics, scalingFactor,container){
     this.objects = [new Obstacle(3,3,2,2)];
     this.endpoint = new Endpoint(1, 1, 2, 2);
     this.scalingFactor = scalingFactor;
@@ -10,6 +9,8 @@ class Drive
     this.lastTimeStamp = 0;
     this.time = null;
     this.graphics = graphics;
+    this.container = container;
+    this.cars = [new Car(5, 5, 2, 1.2,this.container)];
   }
 
   setScalingFactor(scalingFactor)
@@ -51,7 +52,7 @@ class Drive
         var car = this.cars[i];
         this.userCallback(car);
         car.update(deltaTime);
-        car.draw(this.graphics, this.scalingFactor);
+        car.draw(this.scalingFactor);
 
         for(var i = 0; i < this.objects.length; i++)
         {
