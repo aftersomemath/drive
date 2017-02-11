@@ -27,27 +27,32 @@ class Drive
     this.app.ticker.add(this.update, this);
   }
 
+  render(deltaTime)
+  {
+    this.graphics.clear();
+
+    for(var i = 0; i < this.objects.length; i++)
+    {
+      var object = this.objects[i];
+      object.draw(this.graphics, this.scalingFactor);
+    }
+
+    this.endpoint.draw(this.graphics, this.scalingFactor);
+
+    for(var i = 0; i < this.cars.length; i++)
+    {
+      var car = this.cars[i];
+      car.draw(this.scalingFactor);
+    }
+  }
+
   update()
   {
       var currentTime = Date.now();
       var deltaTime = (currentTime - this.lastTimeStamp)/1000.0;
       this.lastTimeStamp = currentTime;
 
-      this.graphics.clear();
-
-      for(var i = 0; i < this.objects.length; i++)
-      {
-        var object = this.objects[i];
-        object.draw(this.graphics, this.scalingFactor);
-      }
-
-      this.endpoint.draw(this.graphics, this.scalingFactor);
-
-      for(var i = 0; i < this.cars.length; i++)
-      {
-        var car = this.cars[i];
-        car.draw(this.scalingFactor);
-      }
+      this.render();
 
       for(var i = 0; i < this.objects.length; i++)
       {
@@ -119,7 +124,7 @@ class Drive
 	  	    drive.cars[0] = new Car(10,5.625, 2, 1.2, container);
 	        drive.endpoint = new Endpoint (18,0,2,11.25);
 	  }
-
+    drive.render();
 	  return drive;
   }
 
