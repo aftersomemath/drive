@@ -1,4 +1,4 @@
-class obstacle()
+class Obstacle
 {
   constructor(x,y,length,width) {
     this.x = x;
@@ -6,15 +6,15 @@ class obstacle()
     this.length = length;
     this.width = width;
   }
-  
-  function drawObstacle() {
-	  var rect = new PIXI.Graphics();
-	  rect.beginFill(0x709FE9, 1); // corresponds to light blue
-	  rect.drawRect(this.x,this.y,this.length,this.width);
-	  rect.endFill();
+
+  draw(graphics, scalingFactor) {
+	  graphics.beginFill(0x709FE9, 1); // corresponds to light blue
+	  graphics.drawRect(this.x * scalingFactor, this.y * scalingFactor,
+                      this.length * scalingFactor, this.width * scalingFactor);
+	  graphics.endFill();
   }
 
-  function update(){
+  update(deltaTime){
 
   }
 }

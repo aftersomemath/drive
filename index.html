@@ -10,33 +10,38 @@
 <script src="pixi.min.js"></script> <!-- importing pixi and custom classes -->
 <script src="car.js"></script>
 <script src="drive.js"></script>
-  
+<script src="obstacle.js"></script>
+<script src="endpoint.js"></script>
 <body>
   <script type="text/javascript">
     // The application will create a renderer using WebGL, if possible,
     // with a fallback to a canvas render. It will also setup the ticker
     // and the root stage PIXI.Container.
     var app = new PIXI.Application({backgroundColor : 0x1099bb});
-    resize();
 
     window.onresize = function (event){ resize(); }
     window.onload = function () { onLoad(); };
-
-    var drive = new Drive();
+    var drive = null;
     var editor = null;
+
+    var scalingFactor = 0.0;
+
     function startButtonCallback()
 	  {
-
       // Note that these parantheses on the edges are very important for some unknown reason
-      //var userCode = '(function() {console.log("User callback");})';
-      //var userCallback = eval(userCode);
-      var userCode = '(function(){' + editor.getValue() + '})';
+      var userCode = '(function(car){' + editor.getValue() + '})';
       var userCallback = eval(userCode);
       drive.startSimulation(userCallback);
     }
 
     function onLoad()
     {
+      resize();
+
+      var graphics = new PIXI.Graphics();
+      drive = new Drive(graphics, scalingFactor);
+      app.stage.addChild(graphics);
+
       // The application will create a canvas element for you that you 
       // can then insert into the DOM.
       test = document.getElementById("htmlcanvas");
@@ -49,15 +54,22 @@
     }
 
     function resize() {
-      var w = window.innerWidth*(3.0/5.0);
-      var h = w * (9.0/16.0);
+      var wPix = window.innerWidth*(3.0/5.0);
+      var hPix = wPix * (9.0/16.0);
 
       //this part resizes the canvas but keeps ratio the same
-      app.renderer.view.style.width = w + "px";
-      app.renderer.view.style.height = h + "px";
+      app.renderer.view.style.width = wPix + "px";
+      app.renderer.view.style.height = hPix + "px";
 
       //this part adjusts the ratio:
-      app.renderer.resize(w,h);
+      app.renderer.resize(wPix,hPix);
+
+      scalingFactor = wPix / 20.0;
+
+      if(drive != null)
+      {
+        drive.setScalingFactor(scalingFactor);
+      }
     }
 
   </script>
@@ -65,10 +77,8 @@
   <div id="htmlcanvas" name="htmlcanvas" class="drawcanvas"></div>
 
   <div id="textwindow">
-    <div id="editor">console.log("HI");
-var car = Car.getCar();
-car.accelerate(3.2,19);
-</div>
+    <div id="editor">//car.accelerate(0.1,0.1);
+    console.log("HI");</div>
     <button id="submitbutton" type="button" onclick="startButtonCallback()">Upload your code!</button>
   </div>
 
