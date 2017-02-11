@@ -91,12 +91,12 @@ class Drive
       }
       else if(gameState == 1)
       {
-        console.log("YOU CRASHED");
+        alert("YOU CRASHED");
         this.app.ticker.remove(this.update, this);
       }
       else if(gameState == 2)
       {
-        console.log("YOU WON");
+        alert("YOU WON");
         this.app.ticker.remove(this.update, this);
       }
       else
