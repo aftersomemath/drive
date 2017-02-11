@@ -41,8 +41,10 @@
       resize();
 
       var graphics = new PIXI.Graphics();
-      drive = new Drive(graphics, scalingFactor);
+      var container = new PIXI.Container();
+      drive = new Drive(graphics, scalingFactor, container);
       app.stage.addChild(graphics);
+      app.stage.addChild(container);
 
       // The application will create a canvas element for you that you
       // can then insert into the DOM.
